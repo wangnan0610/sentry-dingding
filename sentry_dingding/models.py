@@ -11,7 +11,7 @@ class DingDingMessage(NotifyPlugin):
     author = 'Wangnan0610'
     author_url = 'https://github.com/wangnan0610/sentry-dingding'
     version = sentry_dingding.VERSION
-    description = "钉钉通知"
+    description = "sentry dingding"
     resource_links = [
         ('Bug Tracker', 'https://github.com/wangnan0610/sentry-dingding/issues'),
         ('Source', 'https://github.com/wangnan0610/sentry-dingding'),
