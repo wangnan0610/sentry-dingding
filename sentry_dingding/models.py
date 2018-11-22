@@ -4,8 +4,8 @@ from sentry.plugins.bases.notify import NotifyPlugin
 import sentry_dingding
 
 class DingDingOptionsForm(forms.Form):
-    webhook = forms.CharField(help_text="DingDing Webhook", required=True,
-                               widget=forms.TextInput(attrs={'placeholder': 'dingding webhook'}))
+    endpoint = forms.CharField(help_text="DingDing Endpoint", required=True,
+                               widget=forms.TextInput(attrs={'placeholder': 'dingding endpoint'}))
 
 class DingDingMessage(NotifyPlugin):
     author = 'Wangnan0610'
@@ -23,17 +23,13 @@ class DingDingMessage(NotifyPlugin):
     project_conf_form = DingDingOptionsForm
 
     def is_configured(self, project):
-        return bool(self.get_option('webhook', project))
+        return bool(self.get_option('endpoint', project))
 
     def notify_users(self, group, event, fail_silently=False):
         project = event.project
         link = group.get_absolute_url()
-        webhook = self.get_option('webhook', project)
-        try:
-            exception = event.get_interfaces()['sentry.interfaces.Exception'].to_string(event)
-            msg = exception.replace('  ', '&emsp;').replace('\n', '</br>')
-        except KeyError:
-            msg = event.error()
+        endpoint = self.get_option('endpoint', project)
+
         data = {
             "msgtype": "markdown",
             "markdown": {
@@ -46,12 +42,12 @@ class DingDingMessage(NotifyPlugin):
             },
         }
         self.send_payload(
-            webhook=webhook,
+            endpoint=endpoint,
             data=data
         )
 
-    def send_payload(self, webhook, data):
+    def send_payload(self, endpoint, data):
         requests.post(
-            webhook,
+            endpoint,
             json=data,
         )
