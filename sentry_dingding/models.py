@@ -33,6 +33,7 @@ class DingDingMessage(NotifyPlugin):
         data = {
             "msgtype": "markdown",
             "markdown": {
+                "title": "错误报警",
                 "text": '''### 项目{project_name}发生错误，请尽快查看处理!   \n  ![screenshot](http://pic1.zhimg.com/v2-c41cd2b3b6c58245908ad89f7ddc55e7_b.jpg)
 > [点我直接查看BUG]({link})
                 '''.format(

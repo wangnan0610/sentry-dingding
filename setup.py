@@ -12,7 +12,7 @@ install_requires = [
 
 setup(
     name='sentry-dingding-robot',
-    version='1.2.1',
+    version='1.2.2',
     author='wangnan0610',
     author_email='375584419@qq.com',
     url='https://github.com/wangnan0610/sentry-dingding',
